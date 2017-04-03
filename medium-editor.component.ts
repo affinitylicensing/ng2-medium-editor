@@ -1,31 +1,27 @@
 import { Component, Input, forwardRef, ElementRef, ViewChild, OnChanges, OnInit, OnDestroy } from '@angular/core';
-import { NgControl } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
+import * as MediumEditor from 'medium-editor/dist/js/medium-editor';
 @Component({
     selector: 'medium-editor',
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => MediumEditorComponent),
         multi: true
-    }, NgControl],
-    template: `<div #host></div>`
+    }],
+    template: `<div #host class="{{templateClasses}}"></div>`
 })
 export class MediumEditorComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
     @Input() options: any;
     @Input() placeholder: string;
+    @Input() templateClasses: string;
     el: ElementRef;
-    ngControl: NgControl;
     editor: any;
     @ViewChild('host') host: any;
     propagateChange = (_: any) => { };
 
-    constructor(el: ElementRef, ngControl: NgControl) {
+    constructor(el: ElementRef) {
         this.el = el;
-        if (ngControl) {
-            ngControl.valueAccessor = this;
-            this.ngControl = ngControl;
-        }
+
     }
 
     ngOnInit() {
@@ -50,11 +46,11 @@ export class MediumEditorComponent implements ControlValueAccessor, OnInit, OnDe
     }
 
     ngOnChanges(changes: any) {
+      console.log(changes);
         this.propagateChange(changes);
     }
 
     writeValue(value: any) {
-        console.log(value);
         if (this.editor) {
             if (value && value !== '') {
                 this.editor.setContent(value);
