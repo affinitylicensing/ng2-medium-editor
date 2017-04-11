@@ -1,6 +1,6 @@
 import { Component, Input, forwardRef, ElementRef, ViewChild, OnChanges, OnInit, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import * as MediumEditor from 'medium-editor/dist/js/medium-editor';
+import * as MediumEditor from 'medium-editor';
 @Component({
     selector: 'medium-editor',
     providers: [{
