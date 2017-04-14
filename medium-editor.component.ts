@@ -46,7 +46,6 @@ export class MediumEditorComponent implements ControlValueAccessor, OnInit, OnDe
     }
 
     ngOnChanges(changes: any) {
-      console.log(changes);
         this.propagateChange(changes);
     }
 
