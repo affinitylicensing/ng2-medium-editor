@@ -1,8 +1,8 @@
 {
   "name": "ng2-meditor",
-  "version": "1.0.3",
+  "version": "1.0.2",
   "description": "Medium Editor for Angular2",
-  "main": "index.js",
+  "main": "bundles/ng2-meditor.umd.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "packagr": "ng-packagr -p package.json"
@@ -18,7 +18,8 @@
     "medium-editor": "^5.21.0",
     "@angular/common": "^5.0.0",
     "@angular/core": "^5.0.0",
-    "@angular/forms": "^5.0.0"
+    "@angular/forms": "^5.0.0",
+    "tslib": "^1.7.1"
   },
   "devDependencies": {
     "ng-packagr": "^2.2.0",
@@ -36,9 +37,8 @@
   },
   "homepage": "https://github.com/astronaut1712/ng2-medium-editor#readme",
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
-  "ngPackage": {
-    "lib": {
-      "entryFile": "index.ts"
-    }
-  }
+  "module": "esm5/ng2-meditor.js",
+  "es2015": "esm2015/ng2-meditor.js",
+  "typings": "ng2-meditor.d.ts",
+  "metadata": "ng2-meditor.metadata.json"
 }
