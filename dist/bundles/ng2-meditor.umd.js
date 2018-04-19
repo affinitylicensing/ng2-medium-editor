@@ -1,96 +1,11 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@angular/forms'), require('medium-editor')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', '@angular/forms', 'medium-editor'], factory) :
-	(factory((global['ng2-meditor'] = {}),global.ng.core,global.ng.common,global.ng.forms,global.MediumEditor));
-}(this, (function (exports,core,common,forms,MediumEditor) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('src/index')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'src/index'], factory) :
+	(factory((global['ng2-meditor'] = {}),global.index));
+}(this, (function (exports,index) { 'use strict';
 
-var MediumEditorComponent = (function () {
-    function MediumEditorComponent(el, platformId) {
-        this.platformId = platformId;
-        this.propagateChange = function (_) { };
-        this.el = el;
-    }
-    MediumEditorComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.options = (typeof this.options === 'string') ? JSON.parse(this.options)
-            : (typeof this.options === 'object') ? this.options : {};
-        if (this.placeholder && this.placeholder !== '') {
-            Object.assign(this.options, {
-                placeholder: { text: this.placeholder }
-            });
-        }
-        if (common.isPlatformBrowser(this.platformId)) {
-            this.editor = new MediumEditor(this.host.nativeElement, this.options);
-            this.editor.subscribe('editableInput', function (event, editable) {
-                var value = _this.editor.elements[0].innerHTML;
-                _this.ngOnChanges(value);
-            });
-        }
-    };
-    MediumEditorComponent.prototype.ngOnDestroy = function () {
-        if (this.editor) {
-            this.editor.destroy();
-        }
-    };
-    MediumEditorComponent.prototype.ngOnChanges = function (changes) {
-        this.propagateChange(changes);
-    };
-    MediumEditorComponent.prototype.writeValue = function (value) {
-        if (this.editor) {
-            if (value && value !== '') {
-                this.editor.setContent(value);
-            }
-        }
-    };
-    MediumEditorComponent.prototype.registerOnChange = function (fn) {
-        this.propagateChange = fn;
-    };
-    MediumEditorComponent.prototype.registerOnTouched = function (fn) { };
-    return MediumEditorComponent;
-}());
-MediumEditorComponent.decorators = [
-    { type: core.Component, args: [{
-                selector: 'medium-editor',
-                providers: [{
-                        provide: forms.NG_VALUE_ACCESSOR,
-                        useExisting: core.forwardRef(function () { return MediumEditorComponent; }),
-                        multi: true
-                    }],
-                template: "<div #host class=\"{{templateClasses}}\"></div>"
-            },] },
-];
-MediumEditorComponent.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
-]; };
-MediumEditorComponent.propDecorators = {
-    "options": [{ type: core.Input },],
-    "placeholder": [{ type: core.Input },],
-    "templateClasses": [{ type: core.Input },],
-    "host": [{ type: core.ViewChild, args: ['host',] },],
-};
-var MediumEditorModule = (function () {
-    function MediumEditorModule() {
-    }
-    return MediumEditorModule;
-}());
-MediumEditorModule.decorators = [
-    { type: core.NgModule, args: [{
-                imports: [
-                    common.CommonModule
-                ],
-                declarations: [
-                    MediumEditorComponent
-                ],
-                exports: [
-                    MediumEditorComponent
-                ]
-            },] },
-];
-MediumEditorModule.ctorParameters = function () { return []; };
-
-exports.MediumEditorComponent = MediumEditorComponent;
-exports.MediumEditorModule = MediumEditorModule;
+exports.MediumEditorComponent = index.MediumEditorComponent;
+exports.MediumEditorModule = index.MediumEditorModule;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
