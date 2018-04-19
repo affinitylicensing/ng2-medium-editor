@@ -1,1 +1,1 @@
-export * from './medium-editor.module';
+export { MediumEditorComponent } from './medium-editor.component';

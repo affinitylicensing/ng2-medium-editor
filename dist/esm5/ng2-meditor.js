@@ -1,5 +1,5 @@
-import { Component, Input, forwardRef, ElementRef, ViewChild, Inject, PLATFORM_ID, NgModule } from '@angular/core';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { Component, Input, forwardRef, ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as MediumEditor from 'medium-editor';
 
@@ -68,25 +68,6 @@ MediumEditorComponent.propDecorators = {
     "templateClasses": [{ type: Input },],
     "host": [{ type: ViewChild, args: ['host',] },],
 };
-var MediumEditorModule = (function () {
-    function MediumEditorModule() {
-    }
-    return MediumEditorModule;
-}());
-MediumEditorModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule
-                ],
-                declarations: [
-                    MediumEditorComponent
-                ],
-                exports: [
-                    MediumEditorComponent
-                ]
-            },] },
-];
-MediumEditorModule.ctorParameters = function () { return []; };
 
-export { MediumEditorModule, MediumEditorComponent as ɵa };
+export { MediumEditorComponent };
 //# sourceMappingURL=ng2-meditor.js.map

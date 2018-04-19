@@ -69,28 +69,8 @@ MediumEditorComponent.propDecorators = {
     "templateClasses": [{ type: core.Input },],
     "host": [{ type: core.ViewChild, args: ['host',] },],
 };
-var MediumEditorModule = (function () {
-    function MediumEditorModule() {
-    }
-    return MediumEditorModule;
-}());
-MediumEditorModule.decorators = [
-    { type: core.NgModule, args: [{
-                imports: [
-                    common.CommonModule
-                ],
-                declarations: [
-                    MediumEditorComponent
-                ],
-                exports: [
-                    MediumEditorComponent
-                ]
-            },] },
-];
-MediumEditorModule.ctorParameters = function () { return []; };
 
-exports.MediumEditorModule = MediumEditorModule;
-exports.ɵa = MediumEditorComponent;
+exports.MediumEditorComponent = MediumEditorComponent;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
