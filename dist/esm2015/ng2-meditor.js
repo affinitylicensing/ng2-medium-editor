@@ -1,5 +1,5 @@
-import { Component, Input, forwardRef, ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, Input, forwardRef, ElementRef, ViewChild, Inject, PLATFORM_ID, NgModule } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as MediumEditor from 'medium-editor';
 
@@ -102,6 +102,28 @@ MediumEditorComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+class MediumEditorModule {
+}
+MediumEditorModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule
+                ],
+                declarations: [
+                    MediumEditorComponent
+                ],
+                exports: [
+                    MediumEditorComponent
+                ]
+            },] },
+];
+/** @nocollapse */
+MediumEditorModule.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -111,5 +133,5 @@ MediumEditorComponent.propDecorators = {
  * Generated bundle index. Do not edit.
  */
 
-export { MediumEditorComponent };
+export { MediumEditorComponent, MediumEditorModule };
 //# sourceMappingURL=ng2-meditor.js.map

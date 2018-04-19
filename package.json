@@ -38,7 +38,7 @@
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "ngPackage": {
     "lib": {
-      "entryFile": "index.ts"
+      "entryFile": "./src/index.ts"
     }
   }
 }
