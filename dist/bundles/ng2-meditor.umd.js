@@ -1,11 +1,12 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('medium-editor')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/forms', 'medium-editor'], factory) :
-	(factory((global['ng2-meditor'] = {}),global.ng.core,global.ng.forms,global.MediumEditor));
-}(this, (function (exports,core,forms,MediumEditor) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@angular/forms'), require('medium-editor')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', '@angular/forms', 'medium-editor'], factory) :
+	(factory((global['ng2-meditor'] = {}),global.ng.core,global.ng.common,global.ng.forms,global.MediumEditor));
+}(this, (function (exports,core,common,forms,MediumEditor) { 'use strict';
 
 var MediumEditorComponent = (function () {
-    function MediumEditorComponent(el) {
+    function MediumEditorComponent(el, platformId) {
+        this.platformId = platformId;
         this.propagateChange = function (_) { };
         this.el = el;
     }
@@ -18,11 +19,13 @@ var MediumEditorComponent = (function () {
                 placeholder: { text: this.placeholder }
             });
         }
-        this.editor = new MediumEditor(this.host.nativeElement, this.options);
-        this.editor.subscribe('editableInput', function (event, editable) {
-            var value = _this.editor.elements[0].innerHTML;
-            _this.ngOnChanges(value);
-        });
+        if (common.isPlatformBrowser(this.platformId)) {
+            this.editor = new MediumEditor(this.host.nativeElement, this.options);
+            this.editor.subscribe('editableInput', function (event, editable) {
+                var value = _this.editor.elements[0].innerHTML;
+                _this.ngOnChanges(value);
+            });
+        }
     };
     MediumEditorComponent.prototype.ngOnDestroy = function () {
         if (this.editor) {
@@ -58,6 +61,7 @@ MediumEditorComponent.decorators = [
 ];
 MediumEditorComponent.ctorParameters = function () { return [
     { type: core.ElementRef, },
+    { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
 ]; };
 MediumEditorComponent.propDecorators = {
     "options": [{ type: core.Input },],

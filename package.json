@@ -1,6 +1,6 @@
 {
   "name": "ng2-meditor",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Medium Editor for Angular2",
   "main": "./dist/bundles/ng2-meditor.umd.js",
   "scripts": {

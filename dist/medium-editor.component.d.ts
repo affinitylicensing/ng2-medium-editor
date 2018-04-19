@@ -1,6 +1,7 @@
 import { ElementRef, OnChanges, OnInit, OnDestroy } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 export declare class MediumEditorComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
+    private platformId;
     options: any;
     placeholder: string;
     templateClasses: string;
@@ -8,7 +9,7 @@ export declare class MediumEditorComponent implements ControlValueAccessor, OnIn
     editor: any;
     host: any;
     propagateChange: (_: any) => void;
-    constructor(el: ElementRef);
+    constructor(el: ElementRef, platformId: Object);
     ngOnInit(): void;
     ngOnDestroy(): void;
     ngOnChanges(changes: any): void;

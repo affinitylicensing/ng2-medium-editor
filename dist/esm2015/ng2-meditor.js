@@ -1,4 +1,5 @@
-import { Component, Input, forwardRef, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, forwardRef, ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as MediumEditor from 'medium-editor';
 
@@ -9,8 +10,10 @@ import * as MediumEditor from 'medium-editor';
 class MediumEditorComponent {
     /**
      * @param {?} el
+     * @param {?} platformId
      */
-    constructor(el) {
+    constructor(el, platformId) {
+        this.platformId = platformId;
         this.propagateChange = (_) => { };
         this.el = el;
     }
@@ -25,11 +28,13 @@ class MediumEditorComponent {
                 placeholder: { text: this.placeholder }
             });
         }
-        this.editor = new MediumEditor(this.host.nativeElement, this.options);
-        this.editor.subscribe('editableInput', (event, editable) => {
-            let /** @type {?} */ value = this.editor.elements[0].innerHTML;
-            this.ngOnChanges(value);
-        });
+        if (isPlatformBrowser(this.platformId)) {
+            this.editor = new MediumEditor(this.host.nativeElement, this.options);
+            this.editor.subscribe('editableInput', (event, editable) => {
+                let /** @type {?} */ value = this.editor.elements[0].innerHTML;
+                this.ngOnChanges(value);
+            });
+        }
     }
     /**
      * @return {?}
@@ -84,6 +89,7 @@ MediumEditorComponent.decorators = [
 /** @nocollapse */
 MediumEditorComponent.ctorParameters = () => [
     { type: ElementRef, },
+    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
 ];
 MediumEditorComponent.propDecorators = {
     "options": [{ type: Input },],

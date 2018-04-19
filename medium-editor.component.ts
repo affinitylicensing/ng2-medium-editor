@@ -1,6 +1,8 @@
-import { Component, Input, forwardRef, ElementRef, ViewChild, OnChanges, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, forwardRef, ElementRef, ViewChild, OnChanges, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as MediumEditor from 'medium-editor';
+
 @Component({
     selector: 'medium-editor',
     providers: [{
@@ -19,7 +21,7 @@ export class MediumEditorComponent implements ControlValueAccessor, OnInit, OnDe
     @ViewChild('host') host: any;
     propagateChange = (_: any) => { };
 
-    constructor(el: ElementRef) {
+    constructor(el: ElementRef, @Inject(PLATFORM_ID) private platformId: Object) {
         this.el = el;
 
     }
@@ -32,11 +34,15 @@ export class MediumEditorComponent implements ControlValueAccessor, OnInit, OnDe
                 placeholder: { text: this.placeholder }
             });
         }
-        this.editor = new MediumEditor(this.host.nativeElement, this.options);
-        this.editor.subscribe('editableInput', (event: any, editable: any) => {
+
+	if (isPlatformBrowser(this.platformId)) {
+
+          this.editor = new MediumEditor(this.host.nativeElement, this.options);
+          this.editor.subscribe('editableInput', (event: any, editable: any) => {
             let value = this.editor.elements[0].innerHTML;
             this.ngOnChanges(value);
-        });
+          });
+	}
     }
 
     ngOnDestroy() {
